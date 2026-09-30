@@ -258,20 +258,366 @@ p{
     margin:15px;
 }
 
+
+<!-- ================= CERTIFICATE ================= -->
+
+<div id="certificate" class="certificate">
+
+    <div style="
+        border:6px double #f2c94c;
+        padding:30px 15px;
+        background:#fffdf0;
+        border-radius:15px;
+    ">
+
+        <div style="font-size:60px;">🏆</div>
+
+        <h2 style="color:#1769aa;">
+            🎉 شاباش! 🎉
+        </h2>
+
+        <h1 style="
+            color:#d89c00;
+            font-size:35px;
+        ">
+            Certificate of Achievement
+        </h1>
+
+        <p>
+            یہ سرٹیفکیٹ دیا جاتا ہے
+        </p>
+
+        <h2 id="certificateName"
+            style="
+            color:#1769aa;
+            font-size:38px;
+            margin:15px 0;
+        ">
+        </h2>
+
+        <p>
+            کو، جنہوں نے
+        </p>
+
+        <h3 style="color:#f39c12;">
+            💻 BachonKaComputer.com
+        </h3>
+
+        <p>
+            کی ماؤس سے غبارے پھوڑو گیم کامیابی سے مکمل کی۔
+        </p>
+
+        <div style="
+            font-size:28px;
+            margin:20px;
+        ">
+            ⭐ 🖥️ 🖱️ ⌨️ ⭐
+        </div>
+
+        <h3 style="color:#1769aa;">
+            🌟 Computer Champion 🌟
+        </h3>
+
+        <p>
+            حاصل کردہ اسکور:
+            <strong id="finalScore">0</strong>
+        </p>
+
+    </div>
+
+    <br>
+
+    <!-- Name -->
+
+    <input
+        id="childName"
+        class="name-input"
+        type="text"
+        placeholder="اپنا نام یہاں لکھیں"
+    >
+
+    <br><br>
+
+    <button class="main-btn"
+            onclick="makeCertificate()">
+        📜 میرا Certificate بناؤ
+    </button>
+
+    <button class="main-btn"
+            onclick="window.print()">
+        🖨️ Certificate Print / Save
+    </button>
+
+    <button class="main-btn"
+            onclick="shareCertificate()">
+        📱 WhatsApp پر شیئر کرو
+    </button>
+
+</div>
+
+
+<script>
+
+/* ================= GAME ================= */
+
+let score = 0;
+let balloonsPopped = 0;
+let gameRunning = false;
+
+
+function startGame(){
+
+    const area =
+        document.getElementById("gameArea");
+
+    score = 0;
+    balloonsPopped = 0;
+    gameRunning = true;
+
+    document.getElementById("score").innerText = "0";
+
+    document.getElementById("gameMessage").innerText = "";
+
+    document.getElementById("certificate").style.display =
+        "none";
+
+    area.innerHTML = "";
+
+    createBalloon();
+}
+
+
+/* ================= BALLOON ================= */
+
+function createBalloon(){
+
+    if(!gameRunning) return;
+
+    const area =
+        document.getElementById("gameArea");
+
+    const balloon =
+        document.createElement("div");
+
+    balloon.className = "balloon";
+
+    balloon.innerText = "🎈";
+
+    const maxX =
+        Math.max(10, area.clientWidth - 70);
+
+    const maxY =
+        Math.max(10, area.clientHeight - 80);
+
+    balloon.style.left =
+        Math.random() * maxX + "px";
+
+    balloon.style.top =
+        Math.random() * maxY + "px";
+
+
+    balloon.onclick = function(){
+
+        score += 10;
+
+        balloonsPopped++;
+
+        document.getElementById("score").innerText =
+            score;
+
+        balloon.remove();
+
+
+        /* 15 balloons complete */
+
+        if(balloonsPopped >= 15){
+
+            gameRunning = false;
+
+            document.getElementById("gameMessage").innerHTML =
+                "🏆 واہ! آپ نے گیم مکمل کر لی!";
+
+            /* SHOW CERTIFICATE */
+
+            document.getElementById("certificate").style.display =
+                "block";
+
+            /* FINAL SCORE */
+
+            document.getElementById("finalScore").innerText =
+                score;
+
+            /* Certificate تک scroll */
+
+            document.getElementById("certificate")
+                .scrollIntoView({
+                    behavior:"smooth"
+                });
+
+            return;
+        }
+
+
+        setTimeout(function(){
+
+            createBalloon();
+
+        },300);
+
+    };
+
+
+    area.appendChild(balloon);
+}
+
+
+/* ================= MAKE CERTIFICATE ================= */
+
+function makeCertificate(){
+
+    const name =
+        document.getElementById("childName")
+        .value
+        .trim();
+
+
+    if(name === ""){
+
+        alert(
+            "😊 پہلے اپنا نام لکھیں!"
+        );
+
+        return;
+    }
+
+
+    document.getElementById("certificateName")
+        .innerText = name;
+
+
+    document.getElementById("finalScore")
+        .innerText = score;
+
+
+    alert(
+        "🎉 مبارک ہو " +
+        name +
+        "! آپ کا Certificate تیار ہے۔"
+    );
+
+}
+
+
+/* ================= WHATSAPP ================= */
+
+function shareCertificate(){
+
+    const name =
+        document.getElementById("childName")
+        .value
+        .trim();
+
+
+    if(name === ""){
+
+        alert(
+            "😊 پہلے اپنا نام لکھیں!"
+        );
+
+        return;
+    }
+
+
+    const message =
+        "🏆 مجھے BachonKaComputer.com کا Computer Champion Certificate ملا ہے! 🎉💻" +
+        "\n\nنام: " + name +
+        "\nاسکور: " + score;
+
+
+    const whatsappURL =
+        "https://wa.me/?text=" +
+        encodeURIComponent(message);
+
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+}
+
+</script>
+
+
+<style>
+
+/* ================= CERTIFICATE STYLE ================= */
+
 .certificate{
+
     display:none;
+
     background:white;
-    border:10px solid #f6c945;
-    border-radius:20px;
-    padding:35px 20px;
-    margin-top:30px;
+
+    border:8px solid #f2c94c;
+
+    border-radius:25px;
+
+    padding:25px;
+
+    margin-top:35px;
+
     text-align:center;
+
+    box-shadow:
+        0 10px 35px #0002;
+
 }
 
-.certificate h2{
-    color:#d89c00;
+
+/* Print Certificate */
+
+@media print{
+
+    body *{
+
+        visibility:hidden;
+
+    }
+
+    #certificate,
+    #certificate *{
+
+        visibility:visible;
+
+    }
+
+    #certificate{
+
+        position:absolute;
+
+        left:0;
+
+        top:0;
+
+        width:100%;
+
+        box-shadow:none;
+
+        border:8px solid #f2c94c;
+
+    }
+
+    #certificate button,
+    #certificate input{
+
+        display:none;
+
+    }
+
 }
 
+</style>
 .name-input{
     padding:14px;
     width:min(90%,350px);
