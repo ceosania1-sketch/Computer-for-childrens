@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BachonKaComputer.com | بچوں کا کمپیوٹر</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap');
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:'Noto Nastaliq Urdu', serif;
+    background:#f5fbff;
+    color:#17324d;
+}
+
+header{
+    background:linear-gradient(135deg,#8ed8ff,#fff3a6);
+    padding:25px 15px;
+    text-align:center;
+    border-bottom:5px solid white;
+}
+
+.logo{
+    font-family:Arial,sans-serif;
+    font-size:30px;
+    font-weight:900;
+    color:#1769aa;
+    direction:ltr;
+}
+
+nav{
+    margin-top:18px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+}
+
+nav button{
+    border:0;
+    background:white;
+    color:#1769aa;
+    padding:10px 16px;
+    border-radius:30px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 4px 10px #0001;
+    transition:.2s;
+}
+
+nav button:hover{
+    transform:translateY(-3px) scale(1.03);
+    background:#fff8bd;
+}
+
+.page{
+    display:none;
+    max-width:1100px;
+    margin:auto;
+    padding:35px 18px;
+}
+
+.page.active{
+    display:block;
+}
+
+.hero{
+    min-height:550px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:white;
+    border-radius:35px;
+    padding:35px 20px;
+    box-shadow:0 10px 35px #1769aa18;
+}
+
+h1{
+    font-size:clamp(28px,5vw,55px);
+    color:#1769aa;
+    line-height:1.8;
+    font-weight:900;
+}
+
+h2{
+    font-size:clamp(27px,4vw,42px);
+    color:#1769aa;
+    margin-bottom:20px;
+}
+
+h3{
+    font-size:25px;
+    color:#f39c12;
+    margin:15px 0;
+}
+
+p{
+    font-size:22px;
+    line-height:2.2;
+    font-weight:bold;
+}
+
+.computer{
+    width:270px;
+    margin:25px auto;
+}
+
+.monitor{
+    height:180px;
+    background:#78c9f5;
+    border:12px solid #31516b;
+    border-radius:25px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 0 #263d4e;
+}
+
+.face{
+    font-size:65px;
+}
+
+.stand{
+    width:65px;
+    height:35px;
+    background:#31516b;
+    margin:auto;
+}
+
+.base{
+    width:150px;
+    height:18px;
+    background:#31516b;
+    border-radius:20px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:30px;
+    box-shadow:0 8px 25px #00000012;
+    text-align:center;
+    margin:20px 0;
+}
+
+.emoji{
+    font-size:100px;
+    margin:15px;
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-12px)}
+}
+
+.info{
+    background:#fff9c9;
+    border-radius:25px;
+    padding:25px;
+    margin:20px 0;
+}
+
+.video-box{
+    background:#17324d;
+    color:white;
+    border-radius:25px;
+    padding:45px 20px;
+    margin:25px 0;
+}
+
+.play{
+    display:inline-flex;
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:#ffcc4d;
+    color:#17324d;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+}
+
+.quiz{
+    background:#e5f6ff;
+    padding:30px;
+    border-radius:30px;
+    margin-top:25px;
+}
+
+.quiz button,
+.main-btn{
+    background:#1769aa;
+    color:white;
+    border:0;
+    padding:14px 25px;
+    border-radius:30px;
+    font-size:19px;
+    font-weight:bold;
+    cursor:pointer;
+    margin:8px;
+}
+
+.quiz button:hover,
+.main-btn:hover{
+    background:#0c4f83;
+    transform:scale(1.04);
+}
+
+.result{
+    margin-top:15px;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.game-area{
+    background:#dff6ff;
+    min-height:430px;
+    border-radius:30px;
+    position:relative;
+    overflow:hidden;
+    margin-top:25px;
+    border:5px solid white;
+}
+
+.balloon{
+    position:absolute;
+    font-size:55px;
+    cursor:pointer;
+    user-select:none;
+    animation:float 2s infinite ease-in-out;
+}
+
+@keyframes float{
+    50%{transform:translateY(-12px)}
+}
+
+.score{
+    font-size:28px;
+    font-weight:900;
+    background:white;
+    display:inline-block;
+    padding:10px 25px;
+    border-radius:25px;
+    margin:15px;
+}
+
+.certificate{
+    display:none;
+    background:white;
+    border:10px solid #f6c945;
+    border-radius:20px;
+    padding:35px 20px;
+    margin-top:30px;
+    text-align:center;
+}
+
+.certificate h2{
+    color:#d89c00;
+}
+
+.name-input{
+    padding:14px;
+    width:min(90%,350px);
+    border:3px solid #8ed8ff;
+    border-radius:15px;
+    font-size:18px;
+    text-align:center;
+}
+
+footer{
+    background:#17324d;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+    margin-top:30px;
+}
+
+footer p{
+    font-size:17px;
+}
+
+/* موبائل */
+@media(max-width:600px){
+    nav button{
+        font-size:14px;
+        padding:8px 12px;
+    }
+
+    p{
+        font-size:18px;
+    }
+
+    .computer{
+        width:220px;
+    }
+
+    .game-area{
+        min-height:500px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">💻 BachonKaComputer.com</div>
+
+<nav>
+<button onclick="showPage('home')">🏠 ہوم</button>
+<button onclick="showPage('mouse')">🖱️ ماؤس</button>
+<button onclick="showPage('keyboard')">⌨️ کی بورڈ</button>
+<button onclick="showPage('monitor')">🖥️ مانیٹر</button>
+<button onclick="showPage('cpu')">🧠 سی پی یو</button>
+<button onclick="showPage('game')">🎈 گیم</button>
+</nav>
+
+</header>
+
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+<div class="hero">
+
+<h1>السلام علیکم بچو! 👋<br>
+آؤ کمپیوٹر کی دنیا میں چلتے ہیں! 🚀</h1>
+
+<div class="computer">
+
+<div class="monitor">
+<div class="face">😄</div>
+</div>
+
+<div class="stand"></div>
+<div class="base"></div>
+
+</div>
+
+<p>
+یہاں ہم کمپیوٹر کو کھیل کھیل کر اور مزے مزے سے سیکھیں گے! 🎮
+</p>
+
+<button class="main-btn" onclick="showPage('mouse')">
+چلو سیکھنا شروع کریں! ⭐
+</button>
+
+</div>
+
+</section>
+
+
+<!-- MOUSE -->
+
+<section id="mouse" class="page">
+
+<div class="card">
+
+<h2>🖱️ ماؤس کیا ہے؟</h2>
+
+<div class="emoji">🐭</div>
+
+<div class="info">
+
+<p>
+میں ماؤس ہوں! 🖱️<br>
+میں کلک کرتا ہوں اور چیزیں کھولنے میں مدد کرتا ہوں۔
+</p>
+
+</div>
+
+<div class="video-box">
+
+<h3 style="color:white;">🎬 ماؤس کیسے پکڑتے ہیں؟</h3>
+
+<div class="play">▶</div>
+
+<p style="color:white;">
+یہاں آپ اپنی ماؤس سکھانے والی ویڈیو لگا سکتے ہیں۔
+</p>
+
+</div>
+
+<div class="quiz">
+
+<h3>❓ سوال</h3>
+
+<p>ماؤس سے ہم کیا کرتے ہیں؟</p>
+
+<button onclick="mouseAnswer(true)">🖱️ کلک</button>
+<button onclick="mouseAnswer(false)">🍎 سیب کھاتے ہیں</button>
+
+<div id="mouseResult" class="result"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- KEYBOARD -->
+
+<section id="keyboard" class="page">
+
+<div class="card">
+
+<h2>⌨️ کی بورڈ کیا ہے؟</h2>
+
+<div class="emoji">⌨️</div>
+
+<div class="info">
+
+<p>
+میں کی بورڈ ہوں! 😃<br>
+میرے بٹن دبا کر آپ حروف، نمبر اور الفاظ لکھ سکتے ہیں۔
+</p>
+
+</div>
+
+<div class="quiz">
+
+<h3>❓ سوال</h3>
+
+<p>کی بورڈ کس کام آتا ہے؟</p>
+
+<button onclick="keyboardAnswer(true)">⌨️ لکھنے کے لیے</button>
+<button onclick="keyboardAnswer(false)">🍕 کھانے کے لیے</button>
+
+<div id="keyboardResult" class="result"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MONITOR -->
+
+<section id="monitor" class="page">
+
+<div class="card">
+
+<h2>🖥️ مانیٹر کیا ہے؟</h2>
+
+<div class="emoji">🖥️</div>
+
+<div class="info">
+
+<p>
+میں مانیٹر ہوں! 👀<br>
+میں کمپیوٹر کی تصویریں، ویڈیوز اور الفاظ دکھاتا ہوں۔
+</p>
+
+</div>
+
+<div class="quiz">
+
+<h3>❓ سوال</h3>
+
+<p>مانیٹر ہمیں کیا دکھاتا ہے؟</p>
+
+<button onclick="monitorAnswer(true)">🖥️ تصویریں اور الفاظ</button>
+<button onclick="monitorAnswer(false)">🍪 بسکٹ</button>
+
+<div id="monitorResult" class="result"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CPU -->
+
+<section id="cpu" class="page">
+
+<div class="card">
+
+<h2>🧠 سی پی یو — کمپیوٹر کا دماغ</h2>
+
+<div class="emoji">🧠</div>
+
+<div class="info">
+
+<p>
+CPU کو ہم کمپیوٹر کا دماغ بھی کہتے ہیں۔ 🧠💻<br>
+یہ کمپیوٹر کے بہت سے کاموں کو چلانے میں مدد کرتا ہے۔
+</p>
+
+</div>
+
+<div class="quiz">
+
+<h3>❓ سوال</h3>
+
+<p>CPU کو عام طور پر کیا کہا جاتا ہے؟</p>
+
+<button onclick="cpuAnswer(true)">🧠 کمپیوٹر کا دماغ</button>
+<button onclick="cpuAnswer(false)">🥤 پانی کی بوتل</button>
+
+<div id="cpuResult" class="result"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- GAME -->
+
+<section id="game" class="page">
+
+<div class="card">
+
+<h2>🎈 ماؤس سے غبارے پھوڑو!</h2>
+
+<p>
+غبارے پر کلک کرو اور زیادہ سے زیادہ نمبر حاصل کرو! 🎯
+</p>
+
+<div class="score">
+اسکور: <span id="score">0</span>
+</div>
+
+<br>
+
+<button class="main-btn" onclick="startGame()">
+🎮 گیم شروع کریں
+</button>
+
+<div id="gameArea" class="game-area"></div>
+
+<div id="gameMessage" class="result"></div>
+
+
+<!-- CERTIFICATE -->
+
+<div id="certificate" class="certificate">
+
+<h2>🏆 مبارک ہو! 🏆</h2>
+
+<p>آپ نے کمپیوٹر گیم مکمل کر لی!</p>
+
+<br>
+
+<input
+id="childName"
+class="name-input"
+placeholder="اپنا نام لکھیں"
+>
+
+<br><br>
+
+<h2 id="certificateName"></h2>
+
+<p>
+نے "BachonKaComputer.com"
+کی Learning Game مکمل کی ہے۔
+</p>
+
+<h3>🌟 Computer Champion 🌟</h3>
+
+<button class="main-btn" onclick="makeCertificate()">
+📜 سرٹیفکیٹ حاصل کرو
+</button>
+
+<button class="main-btn" onclick="shareCertificate()">
+📱 WhatsApp پر شیئر کرو
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+<p>
+💻 BachonKaComputer.com
+</p>
+
+<p>
+بچوں کے لیے آسان اور مزے دار کمپیوٹر تعلیم 🌟
+</p>
+
+</footer>
+
+
+<script>
+
+function showPage(pageId){
+
+    document.querySelectorAll('.page').forEach(function(page){
+        page.classList.remove('active');
+    });
+
+    document.getElementById(pageId).classList.add('active');
+
+    window.scrollTo({
+        top:0,
+        behavior:'smooth'
+    });
+}
+
+
+/* MOUSE QUIZ */
+
+function mouseAnswer(correct){
+
+    const result = document.getElementById('mouseResult');
+
+    if(correct){
+        result.innerHTML = "🎉 شاباش! بالکل صحیح جواب! ⭐";
+        result.style.color = "green";
+    }else{
+        result.innerHTML = "😊 دوبارہ کوشش کرو!";
+        result.style.color = "red";
+    }
+}
+
+
+/* KEYBOARD QUIZ */
+
+function keyboardAnswer(correct){
+
+    const result = document.getElementById('keyboardResult');
+
+    if(correct){
+        result.innerHTML = "🎉 بہت خوب! صحیح جواب!";
+        result.style.color = "green";
+    }else{
+        result.innerHTML = "😊 دوبارہ کوشش کرو!";
+        result.style.color = "red";
+    }
+}
+
+
+/* MONITOR QUIZ */
+
+function monitorAnswer(correct){
+
+    const result = document.getElementById('monitorResult');
+
+    if(correct){
+        result.innerHTML = "🎉 شاباش! آپ نے صحیح جواب دیا!";
+        result.style.color = "green";
+    }else{
+        result.innerHTML = "😊 ایک بار پھر سوچو!";
+        result.style.color = "red";
+    }
+}
+
+
+/* CPU QUIZ */
+
+function cpuAnswer(correct){
+
+    const result = document.getElementById('cpuResult');
+
+    if(correct){
+        result.innerHTML = "🧠🎉 بالکل صحیح!";
+        result.style.color = "green";
+    }else{
+        result.innerHTML = "😊 دوبارہ کوشش کرو!";
+        result.style.color = "red";
+    }
+}
+
+
+/* BALLOON GAME */
+
+let score = 0;
+let gameRunning = false;
+let balloonsPopped = 0;
+
+function startGame(){
+
+    const area = document.getElementById('gameArea');
+
+    score = 0;
+    balloonsPopped = 0;
+    gameRunning = true;
+
+    document.getElementById('score').innerText = score;
+    document.getElementById('certificate').style.display = 'none';
+    document.getElementById('gameMessage').innerHTML = '';
+
+    area.innerHTML = '';
+
+    createBalloons();
+
+}
+
+
+function createBalloons(){
+
+    if(!gameRunning) return;
+
+    const area = document.getElementById('gameArea');
+
+    const balloon = document.createElement('div');
+
+    balloon.className = 'balloon';
+
+    const balloons = [
+        '🎈',
+        '🎈',
+        '🎈',
+        '🎈',
+        '🎈'
+    ];
+
+    balloon.innerText =
+        balloons[Math.floor(Math.random()*balloons.length)];
+
+    const maxX = Math.max(20, area.clientWidth - 70);
+    const maxY = Math.max(20, area.clientHeight - 80);
+
+    balloon.style.left =
+        Math.random()*maxX + 'px';
+
+    balloon.style.top =
+        Math.random()*maxY + 'px';
+
+    balloon.onclick = function(){
+
+        score += 10;
+        balloonsPopped++;
+
+        document.getElementById('score').innerText = score;
+
+        balloon.remove();
+
+        if(balloonsPopped >= 15){
+
+            gameRunning = false;
+
+            document.getElementById('gameMessage').innerHTML =
+                "🏆 واہ! آپ نے 15 غبارے پھوڑ دیے!";
+
+            document.getElementById('certificate').style.display =
+                'block';
+
+            return;
+        }
+
+        setTimeout(createBalloons,300);
+    };
+
+    area.appendChild(balloon);
+}
+
+
+/* CERTIFICATE */
+
+function makeCertificate(){
+
+    const name =
+        document.getElementById('childName').value.trim();
+
+    if(name === ''){
+
+        alert('پہلے اپنا نام لکھیں 😊');
+        return;
+
+    }
+
+    document.getElementById('certificateName').innerText =
+        name;
+
+    alert(
+        '🎉 مبارک ہو ' +
+        name +
+        '! آپ کا سرٹیفکیٹ تیار ہے۔'
+    );
+
+}
+
+
+/* WHATSAPP SHARE */
+
+function shareCertificate(){
+
+    const name =
+        document.getElementById('childName').value.trim();
+
+    if(name === ''){
+
+        alert('پہلے اپنا نام لکھیں 😊');
+        return;
+
+    }
+
+    const message =
+        '🏆 میں نے BachonKaComputer.com کی Computer Learning Game مکمل کر لی! 🎉💻';
+
+    const url =
+        'https://wa.me/?text=' +
+        encodeURIComponent(message);
+
+    window.open(url,'_blank');
+
+}
+
+</script>
+
+</body>
+  </html>
