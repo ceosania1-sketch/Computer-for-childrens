@@ -329,7 +329,26 @@ document.addEventListener("DOMContentLoaded", function() {
       window.speechSynthesis.speak(msg);
     };
     gameDiv.appendChild(btn);
-  }
+  }<div style="text-align:center; background:#e3f2fd; padding:20px; border-radius:25px;">
+  <h2 style="color:#0d47a1;">🔤 ABC Wala Game</h2>
+  <p id="abcResult" style="color:#e91e63; background:white; padding:10px; border-radius:10px; min-height:30px;">Kisi harf par click karo!</p>
+  <div style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;">
+    <button onclick="showABC('A')" style="width:55px;height:55px;font-size:22px;background:#ffeb3b;border:2px solid #0d47a1;border-radius:12px;">A</button>
+    <button onclick="showABC('B')" style="width:55px;height:55px;font-size:22px;background:#ffeb3b;border:2px solid #0d47a1;border-radius:12px;">B</button>
+    <button onclick="showABC('C')" style="width:55px;height:55px;font-size:22px;background:#ffeb3b;border:2px solid #0d47a1;border-radius:12px;">C</button>
+    <button onclick="showABC('D')" style="width:55px;height:55px;font-size:22px;background:#ffeb3b;border:2px solid #0d47a1;border-radius:12px;">D</button>
+    <button onclick="showABC('E')" style="width:55px;height:55px;font-size:22px;background:#ffeb3b;border:2px solid #0d47a1;border-radius:12px;">E</button>
+    <button onclick="showABC('F')" style="width:55px;height:55px;font-size:22px;background:#ffeb3b;border:2px solid #0d47a1;border-radius:12px;">F</button>
+    <button onclick="showABC('G')" style="width:55px;height:55px;font-size:22px;background:#ffeb3b;border:2px solid #0d47a1;border-radius:12px;">G</button>
+    <button onclick="showABC('H')" style="width:55px;height:55px;font-size:22px;background:#ffeb3b;border:2px solid #0d47a1;border-radius:12px;">H</button>
+  </div>
+</div>
+<script>
+function showABC(letter){
+  var data = {'A':'🍎 A for Apple - Seb','B':'⚽ B for Ball - Gaind','C':'🐱 C for Cat - Billi','D':'🐶 D for Dog - Kutta','E':'🐘 E for Elephant - Hathi','F':'🐟 F for Fish - Machli','G':'🍇 G for Grapes - Angoor','H':'🏠 H for House - Ghar'};
+  document.getElementById('abcResult').innerText = data[letter];
+}
+</script>
 });
 </script>
 
