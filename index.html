@@ -290,6 +290,48 @@ for(let letter in abcData){
   gameDiv.appendChild(btn);
 }
 </script>
+    <div style="text-align:center; background:#e3f2fd; padding:20px; border-radius:25px; margin:20px; font-family:sans-serif;">
+  <h2 style="color:#0d47a1;">🔤 ABC Wala Game</h2>
+  <p>Har harf par click karo!</p>
+  <div id="abcGame" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;"></div>
+  <h3 id="abcResult" style="margin-top:20px; color:#e91e63; min-height:60px; background:white; padding:10px; border-radius:10px;"></h3>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  let abcData = {
+    'A': '🍎 A for Apple - Seb', 'B': '⚽ B for Ball - Gaind',
+    'C': '🐱 C for Cat - Billi', 'D': '🐶 D for Dog - Kutta',
+    'E': '🐘 E for Elephant - Hathi', 'F': '🐟 F for Fish - Machli',
+    'G': '🍇 G for Grapes - Angoor', 'H': '🏠 H for House - Ghar',
+    'I': '🍦 I for Ice Cream', 'J': '🐆 J for Jug - Jag',
+    'K': '🪁 K for Kite - Patang', 'L': '🦁 L for Lion - Sher',
+    'M': '🐒 M for Monkey - Bandar', 'N': '🪺 N for Nest - Ghonsla',
+    'O': '🍊 O for Orange - Narangi', 'P': '🦜 P for Parrot - Tota',
+    'Q': '👑 Q for Queen - Malika', 'R': '🌹 R for Rose - Gulab',
+    'S': '☀️ S for Sun - Suraj', 'T': '🐯 T for Tiger - Tiger',
+    'U': '☂️ U for Umbrella - Chhatri', 'V': '🎻 V for Violin - Baja',
+    'W': '⌚ W for Watch - Ghari', 'X': '🎄 X for X-Mas Tree',
+    'Y': '🟡 Y for Yak - Yak', 'Z': '🦓 Z for Zebra - Zebra'
+  };
+
+  let gameDiv = document.getElementById('abcGame');
+  let resultDiv = document.getElementById('abcResult');
+  gameDiv.innerHTML = "";
+  
+  for(let letter in abcData){
+    let btn = document.createElement('button');
+    btn.innerText = letter;
+    btn.style.cssText = "width:60px; height:60px; font-size:24px; font-weight:bold; background:#ffeb3b; border:2px solid #0d47a1; border-radius:15px; cursor:pointer;";
+    btn.onclick = function(){
+      resultDiv.innerText = abcData[this.innerText];
+      let msg = new SpeechSynthesisUtterance(this.innerText + " for " + abcData[this.innerText]);
+      window.speechSynthesis.speak(msg);
+    };
+    gameDiv.appendChild(btn);
+  }
+});
+</script>
 
 <!-- ================= CERTIFICATE ================= -->
 
