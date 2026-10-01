@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABC Game - FTL Trading Tech</title>
+</head>
+<body style="margin:0; font-family:sans-serif; background:#f0f8ff; display:flex; justify-content:center; align-items:center; min-height:100vh;">
+
+<div style="text-align:center; background:#e3f2fd; padding:20px; border-radius:25px; max-width:400px; width:90%; box-shadow:0 4px 15px rgba(0,0,0,0.2);">
+  <h2 style="color:#0d47a1;">🔤 ABC Wala Game</h2>
+  <p>Har harf par click karo!</p>
+  <div id="abcGame" style="display:flex; flex-wrap:wrap; justify-content:center; gap:10px;"></div>
+  <h3 id="abcResult" style="margin-top:20px; color:#e91e63; background:white; padding:12px; border-radius:12px; min-height:30px;">...</h3>
+</div>
+
+<script>
+let abcData = {
+  'A': '🍎 A for Apple - Seb', 'B': '⚽ B for Ball - Gaind',
+  'C': '🐱 C for Cat - Billi', 'D': '🐶 D for Dog - Kutta',
+  'E': '🐘 E for Elephant - Hathi', 'F': '🐟 F for Fish - Machli',
+  'G': '🍇 G for Grapes - Angoor', 'H': '🏠 H for House - Ghar'
+};
+
+let gameDiv = document.getElementById('abcGame');
+let resultDiv = document.getElementById('abcResult');
+
+for(let letter in abcData){
+  let btn = document.createElement('button');
+  btn.innerText = letter;
+  btn.style.cssText = "width:60px; height:60px; font-size:24px; font-weight:bold; background:#ffeb3b; border:2px solid #0d47a1; border-radius:15px; cursor:pointer;";
+  btn.onclick = function(){
+    resultDiv.innerText = abcData[letter];
+    let msg = new SpeechSynthesisUtterance(letter + " for " + abcData[letter]);
+    window.speechSynthesis.speak(msg);
+  };
+  gameDiv.appendChild(btn);
+}
+</script>
+
+</body>
+</html>
